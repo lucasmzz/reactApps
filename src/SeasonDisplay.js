@@ -1,3 +1,4 @@
+import './SeasonDisplay.css';
 import React from 'react';
 
 const getSeason = (lat,month) => {
@@ -9,16 +10,26 @@ const getSeason = (lat,month) => {
 };
 
 const SeasonDisplay = (props) => {
+	const seasonConfig = {
+		summer: {
+			text: 'Lets go to the beach!',
+			iconName: 'sun'
+		},
+		winter: {
+			text: 'BUURRR It is chilly!',
+			iconName: 'snowflake'
+		}
+	}
+
 	const season = getSeason(props.lat,new Date().getMonth());
-	const seasonText = season === 'winter' ? 'BUURRR It is chilly!' : 'Lets go to the beach!';
-	const seasonIcon = season ==='winter' ? 'snowflake' : 'sun';
+	const { text , iconName } = seasonConfig[season];
 	return (
-		<div>
-			<i className={`${seasonIcon} icon`} />
-			<h1>{seasonText}</h1>
-			<i className={`${seasonIcon} icon`} />
+		<div className={`season-display ${season}`}>
+			<i className={`icon-left massive ${iconName} icon`} />
+			<h1>{text}</h1>
+			<i className={`icon-right massive ${iconName} icon`} />
 		</div>
 	);
 };
-
+ 
 export default SeasonDisplay;
